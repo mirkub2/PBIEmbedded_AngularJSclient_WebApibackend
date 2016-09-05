@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <script src="Scripts/angular.min.js"></script>
+    <script src="app/app.module.js"></script>
+    <script src="app/main.js"></script>
+    <script src="Scripts/powerbi.js"></script>
+
+
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+        <div ng-controller="ReportsController" ng-init="reportlist()">
+            <div id="login_sumbitrender" ng-show="vislogin_sumbitrender">
+
+                Username (this needs to be get in login time, in this example fixed value):
+                <input id="username" type="text" value="User A"  ng-model="username" /><br />
+
+                Select roles (in this example role = accessible company data in multitenant database):<br />
+                <input type="checkbox" value="Customer A" ng-model="CustomerA" />Customer A<br />
+                <input type="checkbox" value="Customer B" ng-model="CustomerB" />Customer B<br />
+                <input type="checkbox" value="Customer C" ng-model="CustomerC" />Customer C<br />
+                <input type="checkbox" value="Customer D" ng-model="CustomerD" />Customer D<br />
+                <input type="checkbox" value="Customer E" ng-model="CustomerE" />Customer E<br />
+                <input type="checkbox" value="Customer F" ng-model="CustomerF" />Customer F<br />
+                <input type="checkbox" value="Customer G" ng-model="CustomerG" />Customer G<br />
+
+                Select report:<br />
+                <select id = "dropdownReport" ng-model="selectedReport">>
+                    <option ng-repeat="report in reports" value="{{report.id}}">{{report.name}}</option>
+                </select> <br /> <br />
+            </div>
+            {{counter}} render sessions.<br />
+            Validation behind this button can be used for menu item...
+            <button ng-click="validate()">Render</button>
+            <div id="render" ng-show="visrender">
+                    <div id="Report"
+                         powerbi-type="report"
+                         powerbi-access-token="{{embedToken}}"
+                         powerbi-embed="{{embedUrl}}"
+                         powerbi-report="{{reportId}}"
+                         style="height:85vh">
+                        <iframe style="width:100%;height:100%;"   src=""   scrolling="no" allowfullscreen="true"></iframe>
+                    </div>
+            </div>
+    </div>
+</body>
+</html>
